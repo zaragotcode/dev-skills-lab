@@ -7,15 +7,15 @@
   <title>My Developer Skills</title>
 </head>
 <body>
-  <h1>Skills</h1>
+  <h1>My Developer Skills</h1>
   <ul>
-    <% skills.forEach(todo => { %>
+    <% skills.forEach(skill => { %>
       <li>
-				<%= skills.text %> 
+				<%= skill.text %> 
 				- 
-				<%= skills.obtained ? 'yes' : 'not yet' %>
+				<%= skill.obtained ? 'yes' : 'not yet' %>
         -
-        <%= skills.progress%>
+        <%= skill.progress%>
 			</li>
     <% }) %>
   </ul>
