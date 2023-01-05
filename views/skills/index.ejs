@@ -11,11 +11,11 @@
   <ul>
     <% skills.forEach(todo => { %>
       <li>
-				<%= todo.text %> 
+				<%= skills.text %> 
 				- 
-				<%= todo.obtained ? 'yes' : 'not yet' %>
+				<%= skills.obtained ? 'yes' : 'not yet' %>
         -
-        <%= todo.progress%>
+        <%= skills.progress%>
 			</li>
     <% }) %>
   </ul>
