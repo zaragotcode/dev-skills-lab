@@ -1,8 +1,10 @@
 import { skills } from '../data/skill-data.js'
+import { Skill } from '../models/skill.js'
 
 function index (req, res) {
   res.render('skills/index', {
-    skills: skills 
+    skills: skills,
+    time: req.time
   })
 }
 
@@ -25,7 +27,7 @@ function create(req, res) {
 }
 
 function show(req, res) {
-  skills.findById(req.params.id)
+  Skill.findById(req.params.id)
   .then(skill => {
 		// Notice we are doing a redirect here!
     res.render('skills/show')
@@ -37,9 +39,50 @@ function show(req, res) {
   })
 }
 
+function deleteSkill(req, res) {
+  Skill.findByIdAndDelete(req.params.id)
+  .then(skill => {
+    res.redirect('/skills')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/skills')
+  })
+}
+
+function edit (req, res) {
+  Skill.findById(req.params.id)
+  .then(skill => {
+    res.render('skills/edit', {
+      todo: todo
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/skills')
+  })
+}
+
+function update(req, res) {
+  req.body.done = !!req.body.done
+  Skill.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(skill => {
+    // redirect back to show view
+    res.redirect(`/skills/${skill._id}`)
+    })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/skills')
+  })
+}
+
+
 export {
   index,
   newSkill as new,
   create,
-  show
+  show,
+  deleteSkill as delete,
+  edit,
+  update
 }
